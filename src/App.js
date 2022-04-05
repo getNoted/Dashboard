@@ -9,21 +9,22 @@ import Register from './pages/Register'
 
 const App = () => {
 	const [loggedInStatus,setloggedInStatus] = useState(true)
-	const sendTokenToChromeExtension = ({ extensionId, token}) => {
-		chrome.runtime.sendMessage(extensionId, { token }, response => {
+	
+	const sendTokenToChromeExtension = ({ extensionId, authInfo}) => {
+		chrome.runtime.sendMessage(extensionId, { authInfo }, response => {
 		  if (!response.success) {
 			console.log('error sending message', response);
 			return response;
 		  }
-		  console.log('Sucesss ::: ', response.message)
+		  console.log(response)
 		});
 	  }
 	
 	useEffect(() => {
 		const authToken = localStorage.getItem('token')
-		let tokenObj =  JSON.stringify({loggedInStatus,authToken})
-
-		sendTokenToChromeExtension({ extensionId: 'fkldjphfipjbgmadnppjeebikbhoaelm', token: tokenObj})
+		let authObj =  JSON.stringify({loggedInStatus,authToken})
+		// console.log(tokenObj);
+		sendTokenToChromeExtension({ extensionId: 'fkldjphfipjbgmadnppjeebikbhoaelm', authInfo: authObj})
 	}, [])
 	
 	return (
