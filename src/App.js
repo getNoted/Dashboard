@@ -1,6 +1,6 @@
 /*global chrome*/
 
-import React, {useEffect} from 'react'
+import React, {useEffect,useState} from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css'
 import Dashboard from './pages/Dashboard'
@@ -8,6 +8,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 
 const App = () => {
+	const [loggedInStatus,setloggedInStatus] = useState(true)
 	const sendTokenToChromeExtension = ({ extensionId, token}) => {
 		chrome.runtime.sendMessage(extensionId, { token }, response => {
 		  if (!response.success) {
@@ -19,8 +20,10 @@ const App = () => {
 	  }
 	
 	useEffect(() => {
-		const token = localStorage.getItem('token')
-		sendTokenToChromeExtension({ extensionId: 'fkldjphfipjbgmadnppjeebikbhoaelm', token: token})
+		const authToken = localStorage.getItem('token')
+		let tokenObj =  JSON.stringify({loggedInStatus,authToken})
+
+		sendTokenToChromeExtension({ extensionId: 'fkldjphfipjbgmadnppjeebikbhoaelm', token: tokenObj})
 	}, [])
 	
 	return (
