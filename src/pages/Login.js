@@ -1,3 +1,5 @@
+/* eslint-disable */
+/*global chrome*/
 import { useState } from 'react'
 import '../App.css'
 function App() {
@@ -7,7 +9,7 @@ function App() {
 	async function loginUser(event) {
 		event.preventDefault()
 
-		const response = await fetch('', {
+		const response = await fetch('http://localhost:8000/api/v1/signin', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -19,15 +21,18 @@ function App() {
 		})
 
 		const data = await response.json()
+		console.log(data)
 
-		if (data.user) {
-			localStorage.setItem('token', data.user)
+		if (data.token) {
+			localStorage.setItem('token', data.token)
 			alert('Login successful')
 			window.location.href = '/dashboard'
 		} else {
 			alert('Please check your username and password')
 		}
 	}
+
+	
 
 	return (
 		<div className="login-con">

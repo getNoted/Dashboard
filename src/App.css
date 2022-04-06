@@ -64,3 +64,17 @@ h1{
     background-repeat: no-repeat;
     background-size: cover;
 }
+.login{
+    color: forestgreen;
+    font-size: 1.2rem;
+    margin: 1em;
+}
+.logout{
+    color: red;
+    font-size: 1.2rem;
+    margin: 1em;
+}
+.buttons{
+    text-align: center;
+    margin: 5rem auto;
+}
