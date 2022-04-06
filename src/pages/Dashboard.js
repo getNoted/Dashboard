@@ -1,3 +1,4 @@
+/* eslint-disable */
 import jwt from 'jsonwebtoken'
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'

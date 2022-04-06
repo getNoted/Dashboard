@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*global chrome*/
 import { useState } from 'react'
 import '../App.css'
